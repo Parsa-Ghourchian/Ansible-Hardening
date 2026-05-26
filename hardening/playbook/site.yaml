@@ -1,0 +1,21 @@
+---
+# playbook/site.yml
+# This is the entry point for the hardening project
+
+- name: Server Hardening and Security Audit
+  hosts: all
+  become: true  # Runs as root/sudo to ensure all changes are applied
+  gather_facts: true # Gathers system info (IPs, OS version, etc.)
+
+  vars:
+    # You can override variables here or keep them in group_vars/all
+    ansible_python_interpreter: /usr/bin/python3
+
+  roles:
+    # This calls the role you've been building
+    - role: hardening
+
+  post_tasks:
+    - name: Summary of execution
+      ansible.builtin.debug:
+        msg: "Hardening process completed. Check /reports for Lynis audit results."

@@ -1,0 +1,26 @@
+# roles/hardening/tasks/main.yaml
+---
+- name: Include hardening package tasks
+  ansible.builtin.include_tasks:
+    file: packages.yaml
+- name: Include hardening sysctl tasks
+  ansible.builtin.include_tasks:
+    file: sysctl.yaml
+- name: Include hardening ntp tasks
+  ansible.builtin.include_tasks:
+    file: ntp.yaml
+- name: Include hardening dns tasks
+  ansible.builtin.include_tasks:
+    file: dns.yaml
+- name: Include hardening ssh tasks
+  ansible.builtin.include_tasks:
+    file: ssh.yaml
+- name: Include hardening docker tasks
+  ansible.builtin.include_tasks:
+    file: docker.yaml
+- name: Include hardening iptables tasks
+  ansible.builtin.include_tasks:
+    file: iptables.yaml
+- name: Include hardening lynis tasks
+  ansible.builtin.include_tasks:
+    file: lynis.yaml

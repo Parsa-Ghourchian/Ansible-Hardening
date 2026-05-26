@@ -1,0 +1,15 @@
+# roles/hardening/tasks/docker.yml
+---
+- name: Ensure Docker is installed and enabled
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Set docker daemon settings for security
+  ansible.builtin.copy:
+    content: '{"live-restore": true, "userland-proxy": false}'
+    dest: /etc/docker/daemon.json
+    mode: '0644'
+  notify: Restart docker
+  tags: docker

@@ -1,0 +1,11 @@
+# roles/hardening/tasks/ssh.yaml
+---
+- name: Ensure SSH configuration is hardened but allows root
+  ansible.builtin.template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart sshd  # Trigger handler defined in handlers/main.yml

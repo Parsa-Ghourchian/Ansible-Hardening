@@ -1,0 +1,19 @@
+# inventory/group-vars/all/hardening.yaml
+---
+# List of packages to install/harden
+required_packages:
+  - ufw
+  - ntp
+  - lynis
+  - fail2ban
+  - vim
+  - curl
+  - iptables
+  - iptables-persistent
+
+# SSH Configuration variables (Allowing root login as requested)
+ssh_port: 22
+ssh_permit_root_login: "yes"
+
+# NTP Server
+ntp_server: "pool.ntp.org"

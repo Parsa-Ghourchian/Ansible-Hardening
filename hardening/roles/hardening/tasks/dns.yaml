@@ -1,0 +1,9 @@
+# roles/hardening/tasks/dns.yml
+---
+- name: Ensure systemd-resolved is configured
+  lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: '^#?DNS='
+    line: 'DNS=8.8.8.8 1.1.1.1'
+  notify: Restart systemd-resolved
+  tags: dns

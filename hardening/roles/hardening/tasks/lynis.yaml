@@ -1,0 +1,14 @@
+# roles/hardening/tasks/lynis.yml
+---
+- name: Run Lynis Audit
+  ansible.builtin.command: lynis audit system --quick
+  register: hardening_lynis_result
+  changed_when: false
+  tags: lynis
+
+- name: Fetch Lynis report to local machine
+  ansible.builtin.fetch:
+    src: /var/log/lynis.log
+    dest: ./reports/lynis_report_{{ ansible_hostname }}.log
+    flat: true
+  tags: lynis

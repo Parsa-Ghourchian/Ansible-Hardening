@@ -1,0 +1,16 @@
+# roles/hardening/handlers/main.yml
+---
+
+- name: Restart sshd
+  ansible.builtin.service:
+    name: ssh
+    state: restarted
+
+- name: Restart ntp
+  ansible.builtin.service:
+    name: ntp
+    state: restarted
+
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: true

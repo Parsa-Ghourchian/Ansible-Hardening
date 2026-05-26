@@ -1,0 +1,14 @@
+# roles/hardening/tasks/iptables.yaml
+---
+- name: Apply iptables rules from template
+  ansible.builtin.template:
+    src: iptables.rules.j2
+    dest: /etc/iptables.rules
+    mode: '0644'
+    owner: root
+    group: root
+  tags: firewall
+
+- name: Ensure iptables is loaded on boot
+  ansible.builtin.shell: iptables-restore < /etc/iptables.rules
+  changed_when: false
